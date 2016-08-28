@@ -1,0 +1,4 @@
+jdbc.url=jdbc:mysql://42.96.150.57/baby?tinyInt1isBit=false
+jdbc.username=admin
+jdbc.password=123456
+jdbc.prefix=z_
