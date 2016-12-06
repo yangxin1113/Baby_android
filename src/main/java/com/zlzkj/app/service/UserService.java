@@ -54,7 +54,8 @@ public class UserService {
     }
 
     public List<Row> findBySQL(){
-
+        //userMapper.selectByPrimaryKey(1);
+        //System.out.print(userMapper.selectByPrimaryKey(1).toString());
         String sql = SQLBuilder.getSQLBuilder(User.class).fields("id,username").selectSql();
         System.out.print(sqlRunner.select(sql,1).get(0)+"zzzz");
         return sqlRunner.select(sql,1);

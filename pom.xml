@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.zlzkj</groupId>
   <artifactId>Baby_android</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>zframe-ssi Maven Webapp</name>
+  <name>Baby_androidp</name>
   <url>http://maven.apache.org</url>
   <properties>
     <java-version>1.7</java-version>
@@ -169,5 +169,5 @@
       </plugin>
     </plugins>
   </build>
-  <name>Baby_android</name>
+
 </project>
