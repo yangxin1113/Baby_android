@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlzkj.app.mapper.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.UserInfo" >
+<mapper namespace="com.zlzkj.app.mapper.UserinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.Userinfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -21,13 +21,13 @@
     delete from x_userinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zlzkj.app.model.UserInfo" >
+  <insert id="insert" parameterType="com.zlzkj.app.model.Userinfo" >
     insert into x_userinfo (id, user_id, phone, 
       sex, pwd)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlzkj.app.model.UserInfo" >
+  <insert id="insertSelective" parameterType="com.zlzkj.app.model.Userinfo" >
     insert into x_userinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlzkj.app.model.UserInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlzkj.app.model.Userinfo" >
     update x_userinfo
     <set >
       <if test="userId != null" >
@@ -82,7 +82,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.UserInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.Userinfo" >
     update x_userinfo
     set user_id = #{userId,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR},

@@ -1,6 +1,6 @@
 package com.zlzkj.app.model;
 
-public class UserInfo {
+public class Userinfo {
     private Integer id;
 
     private Integer userId;

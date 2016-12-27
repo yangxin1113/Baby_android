@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zlzkj.app.mapper.BabyInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.BabyInfo" >
+<mapper namespace="com.zlzkj.app.mapper.BabyinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zlzkj.app.model.Babyinfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="baby_nick" property="babyNick" jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
     delete from x_babyinfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.zlzkj.app.model.BabyInfo" >
+  <insert id="insert" parameterType="com.zlzkj.app.model.Babyinfo" >
     insert into x_babyinfo (id, user_id, baby_nick, 
       baby_age, birthday, height, 
       weight, sex)
@@ -32,7 +32,7 @@
       #{babyAge,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{height,jdbcType=DOUBLE}, 
       #{weight,jdbcType=DOUBLE}, #{sex,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zlzkj.app.model.BabyInfo" >
+  <insert id="insertSelective" parameterType="com.zlzkj.app.model.Babyinfo" >
     insert into x_babyinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zlzkj.app.model.BabyInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlzkj.app.model.Babyinfo" >
     update x_babyinfo
     <set >
       <if test="userId != null" >
@@ -114,7 +114,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.BabyInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.Babyinfo" >
     update x_babyinfo
     set user_id = #{userId,jdbcType=INTEGER},
       baby_nick = #{babyNick,jdbcType=VARCHAR},

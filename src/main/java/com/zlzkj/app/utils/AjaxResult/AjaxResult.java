@@ -57,10 +57,11 @@ public class AjaxResult {
      * @param obj 请求结果
      * @return AjaxResult
      */
-    public static AjaxResult getOK(String message, Object obj){
+    public static AjaxResult getOK(ResultCode errorCode,String message, Object obj){
         AjaxResult result = new AjaxResult();
         result.setMessage(message);
         result.setData(obj);
+        result.setErrorCode(errorCode.getCode());
         return result;
     }
     /**
@@ -91,14 +92,14 @@ public class AjaxResult {
         return result;
     }
 
-    /**
-     * 获取正确结果模板
-     *
-     * @return AjaxResult
-     */
-    public static AjaxResult getOK(){
-        return getOK(ActionConstants.DEFAULT_SUCCESS_RETURNMSG,null);
-    }
+//    /**
+//     * 获取正确结果模板
+//     *
+//     * @return AjaxResult
+//     */
+//    public static AjaxResult getOK(){
+//        return getOK(ActionConstants.DEFAULT_SUCCESS_RETURNMSG,null);
+//    }
 
 
     /**

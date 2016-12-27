@@ -1,10 +1,12 @@
 package com.zlzkj.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.zlzkj.app.mapper.UserMapper;
 import com.zlzkj.app.model.User;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.zlzkj.app.model.Userinfo;
+import com.zlzkj.app.utils.common.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zlzkj.core.mybatis.SqlRunner;
 import com.zlzkj.core.sql.Row;
 import com.zlzkj.core.sql.SQLBuilder;
-import com.zlzkj.core.util.Fn;
 
 @Service
 @Transactional
@@ -59,5 +60,42 @@ public class UserService {
         String sql = SQLBuilder.getSQLBuilder(User.class).fields("id,username").selectSql();
         System.out.print(sqlRunner.select(sql,1).get(0)+"zzzz");
         return sqlRunner.select(sql,1);
+    }
+
+
+    public List<Row> login(String username, String password){
+        List<Row> userList = new ArrayList<Row>();
+        String sql = "";
+        if(Validator.isMobile(username)){
+            sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("phone="+username).selectSql();
+        }else {
+            sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("username="+username).selectSql();
+        }
+        userList = sqlRunner.select(sql);
+
+        if(userList.size()>0 && userList.get(0).get("pwd").equals(password)){
+            //登录成功
+            return userList;
+        }else {
+            //登录失败
+            return null;
+        }
+    }
+
+    public boolean isExit(String username) {
+        boolean flag = false;
+        String sql = "";
+        if(Validator.isMobile(username)){
+            sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("phone="+username).selectSql();
+        }else {
+            sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("username="+username).selectSql();
+        }
+        List<Row> userList = sqlRunner.select(sql);
+        if(userList.size()>0){
+            flag = true;
+        }else {
+            flag = false;
+        }
+        return flag;
     }
 }
