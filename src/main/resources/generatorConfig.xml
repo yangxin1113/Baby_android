@@ -50,15 +50,15 @@
 		</javaClientGenerator>
 		
 		<!-- 表映射 配置表信息 -->
-		<!--<table tableName="x_userinfo" domainObjectName="UserInfo"
+		<table tableName="x_userinfo" domainObjectName="Userinfo"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
 
-		<table tableName="x_babyinfo" domainObjectName="BabyInfo"
+		<table tableName="x_babyinfo" domainObjectName="Babyinfo"
 			   enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
-			   selectByExampleQueryId="false"></table>-->
+			   selectByExampleQueryId="false"></table>
 
 	</context>
 </generatorConfiguration>
