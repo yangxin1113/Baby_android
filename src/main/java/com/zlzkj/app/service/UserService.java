@@ -6,6 +6,8 @@ import java.util.List;
 import com.zlzkj.app.mapper.UserMapper;
 import com.zlzkj.app.model.User;
 import com.zlzkj.app.model.Userinfo;
+import com.zlzkj.app.utils.AjaxResult.AjaxResult;
+import com.zlzkj.app.utils.AjaxResult.ResultCode;
 import com.zlzkj.app.utils.common.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,23 +65,31 @@ public class UserService {
     }
 
 
-    public List<Row> login(String username, String password){
-        List<Row> userList = new ArrayList<Row>();
-        String sql = "";
-        if(Validator.isMobile(username)){
-            sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("phone="+username).selectSql();
-        }else {
-            sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("username="+username).selectSql();
-        }
-        userList = sqlRunner.select(sql);
+    public AjaxResult login(String username, String password){
+        //判断用户是否存在
+        if (isExit(username)){
+            List<Row> userList = new ArrayList<Row>();
+            String sql = "";
+            //手机用户
+            if(Validator.isMobile(username)){
+                sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("phone="+username).selectSql();
+            }else { //用户名用户
+                sql = SQLBuilder.getSQLBuilder(User.class).fields("username,phone,sex,pwd").join(Userinfo.class,"User.id=Userinfo.user_id").where("username="+username).selectSql();
+            }
+            userList = sqlRunner.select(sql);
 
-        if(userList.size()>0 && userList.get(0).get("pwd").equals(password)){
-            //登录成功
-            return userList;
+            if(userList.size()>0 && userList.get(0).get("pwd").equals(password)){
+                //登录成功
+                return AjaxResult.getOK(ResultCode.SUCCESS, "登陆成功", userList.get(0));
+            }else {
+                //密码错误
+                return  AjaxResult.getError(ResultCode.InfoException,"密码错误", "");
+            }
+
         }else {
-            //登录失败
-            return null;
+            return AjaxResult.getError(ResultCode.InfoException,"用户不存在", "");
         }
+
     }
 
     public boolean isExit(String username) {

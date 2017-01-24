@@ -1,7 +1,0 @@
-projectName=zframe-mybatis
-
-jdbc.connector=E:/ZyxDevelop/mysql-connector-java-5.1.30-bin.jar
-jdbc.driverClass=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://42.96.150.57/baby?tinyInt1isBit=false
-jdbc.username=admin
-jdbc.password=123456

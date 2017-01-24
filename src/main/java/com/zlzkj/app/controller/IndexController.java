@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -24,30 +26,17 @@ public class IndexController extends BaseController {
 	@Autowired
 	private UserService adminService;
 	
-	@RequestMapping(value={"/Login"})
+	@RequestMapping(value={"/Login"}, method = RequestMethod.POST)
 	public void login(Model model, HttpServletRequest request, HttpServletResponse response) {
-
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println("zyx"+ username+password);
-		if(adminService.isExit(username)){
-			List<Row> userinfo = adminService.login(username, password);
-			if(userinfo !=null && userinfo.size()>0){
-				ajaxReturn(response, AjaxResult.getOK(ResultCode.SUCCESS, "登陆成功", userinfo.get(0)));
-			}else {
-				ajaxReturn(response, AjaxResult.getError(ResultCode.InfoException,"密码错误", ""));
-
-			}
-		}else {
-			ajaxReturn(response, AjaxResult.getError(ResultCode.InfoException,"用户不存在", ""));
-
-		}
-
+		AjaxResult result = adminService.login(username, password);
+		ajaxReturn(response, result);
 
 	}
 
 
-	@RequestMapping(value={"/OtherLogin"})
+	@RequestMapping(value={"/register"})
 	public void register(Model model, HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
