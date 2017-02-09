@@ -34,11 +34,25 @@ public class IndexController extends BaseController {
 		ajaxReturn(response, result);
 
 	}
-
-
 	@RequestMapping(value={"/register"})
 	public void register(Model model, HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+	}
+
+	@RequestMapping(value={"/getTags"},method = RequestMethod.GET)
+	public void getTags(Model model, HttpServletRequest request, HttpServletResponse response) {
+		String userid = request.getParameter("userid");
+		AjaxResult result = adminService.getTags(userid);
+		ajaxReturn(response, result);
+	}
+
+	@RequestMapping(value={"/updateTags"},method = RequestMethod.POST)
+	public void updateTags(Model model, HttpServletRequest request, HttpServletResponse response) {
+		String tags = request.getParameter("tags");
+		String userid = request.getParameter("tags");
+		System.out.print(tags+">>>"+userid);
+		//AjaxResult result = adminService.updateTags(userid,tags);
+		//ajaxReturn(response, result);
 	}
 }

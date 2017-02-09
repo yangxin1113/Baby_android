@@ -8,7 +8,7 @@ public enum ResultCode {
 	 /**
      * 成功. ErrorCode : 0
      */
-    SUCCESS("0","成功"),
+    SUCCESS("0","获取数据成功"),
     /**
      * 未知异常. ErrorCode : 01
      */
