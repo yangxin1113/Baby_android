@@ -5,7 +5,7 @@ public class Tagsuser {
 
     private String tags;
 
-    private Integer createtime;
+    private Long createtime;
 
     public Integer getUserId() {
         return userId;
@@ -23,11 +23,11 @@ public class Tagsuser {
         this.tags = tags == null ? null : tags.trim();
     }
 
-    public Integer getCreatetime() {
+    public Long getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Integer createtime) {
+    public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
 }

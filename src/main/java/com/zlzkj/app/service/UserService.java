@@ -3,8 +3,11 @@ package com.zlzkj.app.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import com.zlzkj.app.mapper.UserMapper;
 import com.zlzkj.app.model.*;
 import com.zlzkj.app.utils.AjaxResult.AjaxResult;
@@ -45,7 +48,6 @@ public class UserService {
         entity.setLastLoginIp("127.0.0.1");
         entity.setLastLoginTime(0);
         entity.setIsDisabled((byte) 0);*/
-
         userMapper.insert(user);
     }
 
@@ -89,43 +91,6 @@ public class UserService {
         }else {
             return AjaxResult.getError(ResultCode.InfoException,"用户不存在", "");
         }
-    }
-
-
-    public AjaxResult getTags(String userid){
-        List<Row> listAllTags = new ArrayList<Row>();
-        List<Row> listTagsByUser = new ArrayList<Row>();
-        List< Tag> listTagsByUser1 = new ArrayList< Tag>();
-        TagBean tagBean = new TagBean();
-        String sqlAllTags = SQLBuilder.getSQLBuilder(Tag.class).fields("id,tag").selectSql();
-        String sqlTagsByUser = SQLBuilder.getSQLBuilder(Tagsuser.class).fields("tags").where("user_id ="+userid).selectSql();
-        listAllTags = sqlRunner.select(sqlAllTags);
-        listTagsByUser = sqlRunner.select(sqlTagsByUser);
-        String[] tags = listTagsByUser.get(0).get("tags").toString().split("@");
-        System.out.print(listTagsByUser.get(0));
-        System.out.print(tags);
-        HashMap<String,Object> values = new HashMap<String,Object>();
-        for(int i =0; i< tags.length; i++){
-            String[] value = tags[i].split("#");
-            Tag tag= new Tag();
-            tag.setId(Integer.valueOf(value[0]));
-            tag.setTag(value[1]);
-            listTagsByUser1.add(tag);
-        }
-        tagBean.setListAllTags(listAllTags);
-        tagBean.setListTagsByUser1(listTagsByUser1);
-        return AjaxResult.getOK(ResultCode.SUCCESS, "获取数据成功", tagBean);
-
-    }
-
-
-    public AjaxResult updateTags(String userid, String[] tags){
-        Row row = new Row();
-        row.put("user_id", userid);
-        row.put("tags", tags.toString());
-        String updatetags = SQLBuilder.getSQLBuilder(Tagsuser.class).fields("tags").where("user_id ="+userid).updateSql(row);
-        return AjaxResult.getOK(ResultCode.SUCCESS, "获取数据成功", updatetags);
-
     }
 
     public boolean isExit(String username) {

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.zlzkj.app.model.Tagsuser" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="tags" property="tags" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, tags, createtime
@@ -22,7 +22,7 @@
   <insert id="insert" parameterType="com.zlzkj.app.model.Tagsuser" >
     insert into x_tagsuser (user_id, tags, createtime
       )
-    values (#{userId,jdbcType=INTEGER}, #{tags,jdbcType=VARCHAR}, #{createtime,jdbcType=INTEGER}
+    values (#{userId,jdbcType=INTEGER}, #{tags,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.Tagsuser" >
@@ -46,7 +46,7 @@
         #{tags,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
-        #{createtime,jdbcType=INTEGER},
+        #{createtime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -57,7 +57,7 @@
         tags = #{tags,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=INTEGER},
+        createtime = #{createtime,jdbcType=BIGINT},
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
@@ -65,7 +65,7 @@
   <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.Tagsuser" >
     update x_tagsuser
     set tags = #{tags,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=INTEGER}
+      createtime = #{createtime,jdbcType=BIGINT}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

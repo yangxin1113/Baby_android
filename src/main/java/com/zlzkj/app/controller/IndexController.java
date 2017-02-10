@@ -1,10 +1,9 @@
 package com.zlzkj.app.controller;
 
+import com.zlzkj.app.service.TagsService;
 import com.zlzkj.app.service.UserService;
 import com.zlzkj.app.utils.AjaxResult.AjaxResult;
-import com.zlzkj.app.utils.AjaxResult.ResultCode;
 import com.zlzkj.core.base.BaseController;
-import com.zlzkj.core.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * 首页控制器
@@ -25,7 +22,10 @@ public class IndexController extends BaseController {
 	
 	@Autowired
 	private UserService adminService;
-	
+
+	@Autowired
+	private TagsService tagsService;
+
 	@RequestMapping(value={"/Login"}, method = RequestMethod.POST)
 	public void login(Model model, HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");
@@ -43,16 +43,17 @@ public class IndexController extends BaseController {
 	@RequestMapping(value={"/getTags"},method = RequestMethod.GET)
 	public void getTags(Model model, HttpServletRequest request, HttpServletResponse response) {
 		String userid = request.getParameter("userid");
-		AjaxResult result = adminService.getTags(userid);
+		AjaxResult result = tagsService.getTags(userid);
 		ajaxReturn(response, result);
 	}
 
-	@RequestMapping(value={"/updateTags"},method = RequestMethod.POST)
+	@RequestMapping(value={"/updateTags"},method = RequestMethod.GET)
 	public void updateTags(Model model, HttpServletRequest request, HttpServletResponse response) {
-		String tags = request.getParameter("tags");
-		String userid = request.getParameter("tags");
-		System.out.print(tags+">>>"+userid);
-		//AjaxResult result = adminService.updateTags(userid,tags);
+		//String tags = request.getParameter("tags");
+		String tags = "[{\"id\":1,\"tag\":\"妈妈分享\"},{\"id\":2,\"tag\":\"经验之谈\"},{\"id\":4,\"tag\":\"亲子活动\"}]";
+		String userid = "1";
+//		String userid = request.getParameter("userid");
+		AjaxResult result = tagsService.updateTags(userid,tags);
 		//ajaxReturn(response, result);
 	}
 }
