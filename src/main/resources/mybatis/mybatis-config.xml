@@ -3,7 +3,7 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="row" type="com.zlzkj.core.sql.Row" />
+		<!--<typeAlias alias="row" type="com.zlzkj.core.sql.Row" />-->
 	</typeAliases>
 
 </configuration>
