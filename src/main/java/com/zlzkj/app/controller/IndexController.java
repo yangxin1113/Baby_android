@@ -47,12 +47,10 @@ public class IndexController extends BaseController {
 		ajaxReturn(response, result);
 	}
 
-	@RequestMapping(value={"/updateTags"},method = RequestMethod.GET)
+	@RequestMapping(value={"/updateTags"},method = RequestMethod.POST)
 	public void updateTags(Model model, HttpServletRequest request, HttpServletResponse response) {
-		//String tags = request.getParameter("tags");
-		String tags = "[{\"id\":1,\"tag\":\"妈妈分享\"},{\"id\":2,\"tag\":\"经验之谈\"},{\"id\":4,\"tag\":\"亲子活动\"}]";
-		String userid = "1";
-//		String userid = request.getParameter("userid");
+		String tags = request.getParameter("tags");
+		String userid = request.getParameter("userid");
 		AjaxResult result = tagsService.updateTags(userid,tags);
 		//ajaxReturn(response, result);
 	}
